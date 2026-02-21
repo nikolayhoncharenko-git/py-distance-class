@@ -1,17 +1,20 @@
 class Distance:
-    def __init__(self, km):
+    def __init__(self, km: int | float) -> None:
         if not isinstance(km, (int, float)):
-            raise TypeError(f"Not is int of float type")
+            raise TypeError("Not is int of float type")
 
         self.km = float(km)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Distance: {self.km:.4g} kilometers."
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Distance(km={self.km:.4g})"
 
-    def __add__(self, other):
+    def __add__(
+            self,
+            other: "int | float | Distance"
+    ) -> "Distance":
         if isinstance(other, Distance):
             return Distance(self.km + other.km)
 
@@ -20,8 +23,10 @@ class Distance:
 
         return NotImplemented
 
-
-    def __iadd__(self, other):
+    def __iadd__(
+            self,
+            other: "int | float | Distance"
+    ) -> "Distance":
         if isinstance(other, Distance):
             self.km += float(other.km)
             return self
@@ -29,27 +34,33 @@ class Distance:
             self.km += float(other)
             return self
         else:
-            raise TypeError(f"Not is int of float type")
+            raise TypeError("Not is int of float type")
 
-
-    def __mul__(self, scalar):
+    def __mul__(
+            self,
+            scalar: int | float
+    ) -> "Distance":
         if isinstance(scalar, (int, float)):
             return Distance(self.km * scalar)
         else:
-            raise TypeError(f"Not is int of float type")
+            raise TypeError("Not is int of float type")
 
-
-    def __truediv__(self, scalar):
+    def __truediv__(
+            self,
+            scalar: int | float
+    ) -> "Distance":
         if isinstance(scalar, (int, float)) and scalar == 0:
-            raise ZeroDivisionError(f"Not is int of float type")
+            raise ZeroDivisionError("Division by zero")
 
         if isinstance(scalar, (int, float)):
-            return Distance(round(self.km / scalar ,2))
+            return Distance(round(self.km / scalar, 2))
         else:
-            raise TypeError(f"Not is int of float type")
+            raise TypeError("Not is int of float type")
 
-
-    def __lt__(self, other):
+    def __lt__(
+            self,
+            other: "int | float | Distance"
+    ) -> bool:
         if isinstance(other, Distance):
             return self.km < other.km
         elif isinstance(other, (int, float)):
@@ -57,8 +68,10 @@ class Distance:
         else:
             return NotImplemented
 
-
-    def __gt__(self, other):
+    def __gt__(
+            self,
+            other: "int | float | Distance"
+    ) -> bool:
         if isinstance(other, Distance):
             return self.km > other.km
         elif isinstance(other, (int, float)):
@@ -66,7 +79,10 @@ class Distance:
         else:
             return NotImplemented
 
-    def __eq__(self, other):
+    def __eq__(
+            self,
+            other: "int | float | Distance"
+    ) -> bool:
         if isinstance(other, Distance):
             return self.km == other.km
         elif isinstance(other, (int, float)):
@@ -74,7 +90,10 @@ class Distance:
         else:
             return NotImplemented
 
-    def __le__(self, other):
+    def __le__(
+            self,
+            other: "int | float | Distance"
+    ) -> bool:
         if isinstance(other, Distance):
             return self.km <= other.km
         elif isinstance(other, (int, float)):
@@ -82,7 +101,10 @@ class Distance:
         else:
             return NotImplemented
 
-    def __ge__(self, other):
+    def __ge__(
+            self,
+            other: "int | float | Distance"
+    ) -> bool:
         if isinstance(other, Distance):
             return self.km >= other.km
         elif isinstance(other, (int, float)):
